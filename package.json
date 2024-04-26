@@ -21,6 +21,8 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240423.0",
+    "@radix-ui/colors": "^3.0.0",
+    "@tailwindcss/forms": "^0.5.7",
     "wrangler": "^3.52.0"
   }
 }
