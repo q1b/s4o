@@ -1,7 +1,6 @@
 ---
 // Supports weights 200-800
-import '@fontsource-variable/manrope';
-
+import "@fontsource-variable/manrope";
 ---
 
 <html lang="en">
@@ -12,7 +11,21 @@ import '@fontsource-variable/manrope';
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro</title>
 	</head>
-	<body>
-		<h1>Astro</h1>
+	<body class="flex flex-col items-center min-h-screen antialiased pt-20">
+		<header class="max-w-7xl w-full flex justify-between">
+			<div class="flex w-max justify-between gap-x-4 py-3 pl-3 invisible">
+				<div class="size-12 rounded-full bg-slate-400"></div>
+				<div class="flex flex-col">
+					<h3>Doctor's Full Name</h3>
+					<p class="w-44 text-sm">Specialization</p>
+				</div>
+			</div>
+			<nav class="flex gap-x-4 pt-4 pr-7 max-sm:hidden">
+				<a href="#">Home</a>
+				<a href="#">Writings</a>
+				<a href="#">Contact us</a>
+				<a href="#">About us</a>
+			</nav>
+		</header>
 	</body>
 </html>
