@@ -3,7 +3,7 @@ import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 
 const layers = Object.fromEntries(
-	Object.entries(goldDark).map(([_, value], i) => [i + 1, [gray[`gray${i + 1}`], value]])
+	Object.entries(goldDark).map(([_, value], i) => [i + 1, [gray[`gray${i + 1}` as 'gray1'], value]])
 );
 
 /**
