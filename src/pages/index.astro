@@ -3,11 +3,10 @@
 import "@fontsource-variable/manrope";
 import { getCollection } from "astro:content";
 import Card from "./_card.astro";
-
-const articles = await getCollection('articles', ({ data }) => {
-  return data.draft !== true;
-});;
-
+import ContactForm from "./_contact-form.astro";
+const articles = await getCollection("articles", ({ data }) => {
+	return data.draft !== true;
+});
 ---
 
 <html lang="en">
@@ -50,7 +49,9 @@ const articles = await getCollection('articles', ({ data }) => {
 					Odit consectetur aut dolorem numquam aliquam mollitia
 					eveniet! Architecto fuga provident possimus.
 				</p>
-				<div class="flex flex-wrap gap-8 items-center justify-center sm:gap-16 mt-16">
+				<div
+					class="flex flex-wrap gap-8 items-center justify-center sm:gap-16 mt-16"
+				>
 					{
 						articles.map((article) => (
 							<Card
@@ -66,7 +67,93 @@ const articles = await getCollection('articles', ({ data }) => {
 					}
 				</div>
 			</div>
-			
+			<div class="grid grid-cols-12 my-24 lg:my-48">
+				<div class="col-span-full md:col-span-6 lg:col-span-7 pl-8 py-12 bg-gradient-to-tl from-blue-200 from-0% via-60% to-100% via-indigo-100 to-violet-400 xl:rounded-l-2xl">
+					<h2 class=" [text-shadow:0px_5px_6px_#0000001f] text-3xl font-bold tracking-tight text-white">
+						Get in touch
+					</h2>
+					<p class="[text-shadow:0px_3px_3px_#312e814f] mt-6 text-lg max-w-xl w-full leading-8 text-indigo-950 font-medium">
+						Proin volutpat consequat porttitor cras nullam gravida
+						at. Orci molestie a eu arcu. Sed ut tincidunt integer
+						elementum id sem. Arcu sed malesuada et magna.
+					</p>
+					<dl
+						class="mt-10 space-y-4 text-base leading-7 text-indigo-800 font-medium"
+					>
+						<div class="flex gap-x-4">
+							<dt class="flex-none">
+								<span class="sr-only">Address</span>
+								<svg
+									class="h-7 w-6 text-indigo-800"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="currentColor"
+									aria-hidden="true"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"
+									></path>
+								</svg>
+							</dt>
+							<dd>545 Mavis Island<br />Chicago, IL 99191</dd>
+						</div>
+						<div class="flex gap-x-4">
+							<dt class="flex-none">
+								<span class="sr-only">Telephone</span>
+								<svg
+									class="h-7 w-6 text-indigo-800"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="currentColor"
+									aria-hidden="true"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+									></path>
+								</svg>
+							</dt>
+							<dd>
+								<a
+									class="hover:text-indigo-800/90"
+									href="tel:+1 (555) 234-5678"
+									>+1 (555) 234-5678</a>
+							</dd>
+						</div>
+						<div class="flex gap-x-4">
+							<dt class="flex-none">
+								<span class="sr-only">Email</span>
+								<svg
+									class="h-7 w-6 text-indigo-800"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="currentColor"
+									aria-hidden="true"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+									></path>
+								</svg>
+							</dt>
+							<dd>
+								<a
+									class="hover:text-indigo-800/90"
+									href="mailto:hello@example.com"
+									>hello@example.com</a>
+							</dd>
+						</div>
+					</dl>
+				</div>
+				<ContactForm />
+			</div>
 		</main>
 		<footer
 			class="max-w-7x mx-auto overflow-hidden bg-white py-20 px-6 sm:py-24 lg:px-8"
@@ -78,21 +165,21 @@ const articles = await getCollection('articles', ({ data }) => {
 				<div class="pb-6">
 					<a
 						href="#"
-						class="text-sm leading-6 text-gray-600 hover:text-gray-900"
+						class="text-sm leading-6 text-white font-medium hover:text-gray-900"
 						>About</a
 					>
 				</div>
 				<div class="pb-6">
 					<a
 						href="#"
-						class="text-sm leading-6 text-gray-600 hover:text-gray-900"
+						class="text-sm leading-6 text-white font-medium hover:text-gray-900"
 						>Articles</a
 					>
 				</div>
 				<div class="pb-6">
 					<a
 						href="#"
-						class="text-sm leading-6 text-gray-600 hover:text-gray-900"
+						class="text-sm leading-6 text-white font-medium hover:text-gray-900"
 						>Contact us</a
 					>
 				</div>
