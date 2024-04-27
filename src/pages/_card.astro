@@ -1,25 +1,50 @@
 ---
-import type { ImageMetadata } from 'astro';
-import { Image } from 'astro:assets';
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
 
 interface Props {
-   imagePath: string;
-   altText: string;
-   title: string;
-   pubDate: string;
-   description: number;
-   tags: string[]
+    imagePath?: string;
+    altText: string;
+    title: string;
+    pubDate: Date;
+    description: string;
+    tags: Omit<CollectionEntry<'tags'>, 'data'>[];
 }
 
 const { imagePath, altText, title, description, tags, pubDate } = Astro.props;
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{jpeg,jpg,png,gif}');
-if ( imagePath !== undefined && !images[imagePath.replace('@assets/','/src/assets/')]) throw new Error(`"${imagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`);
+const images = import.meta.glob<{ default: ImageMetadata }>(
+    "/src/assets/**/*.{jpeg,jpg,png,gif}",
+);
+if (
+    imagePath !== undefined &&
+    !images[imagePath.replace("@assets/", "/src/assets/")]
+)
+    throw new Error(
+        `"${imagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`,
+    );
 ---
 
-<article class="flex flex-col w-80 items-start justify-between">
+<article
+    class="flex relative group hover:bg-layer-2 transition-colors p-1 rounded-[20px] flex-col w-80 items-start justify-between"
+>
     <div class="relative w-full">
-        { imagePath && <Image class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]" alt={altText} src={images[imagePath.replace('@assets/','/src/assets/')]()} /> }
-        { !imagePath && <div class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"></div> }
+        {
+            imagePath && (
+                <Image
+                    class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
+                    alt={altText}
+                    src={images[
+                        imagePath.replace("@assets/", "/src/assets/")
+                    ]()}
+                />
+            )
+        }
+        {
+            !imagePath && (
+                <div class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]" />
+            )
+        }
         <div
             class="absolute inset-0 rounded-2xl ring-1 ring-gray-900/10 ring-inset"
         >
@@ -42,23 +67,21 @@ if ( imagePath !== undefined && !images[imagePath.replace('@assets/','/src/asset
                         href="#"
                         class="relative z-10 rounded-full bg-gray-50 py-1.5 px-3 font-medium text-gray-600 hover:bg-gray-100"
                     >
-                        {tag}
+                        {tag.id}
                     </a>
                 ))
             }
         </div>
-        <div class="group relative">
-            <h3
-                class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600"
-            >
-                <a href="#">
-                    <span class="absolute inset-0"></span>
-                    {title}
-                </a>
-            </h3>
-            <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
-                {description}
-            </p>
-        </div>
+        <h3
+            class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600"
+        >
+            <a href="#">
+                <span class="absolute inset-0"></span>
+                {title}
+            </a>
+        </h3>
+        <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
+            {description}
+        </p>
     </div>
 </article>

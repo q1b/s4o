@@ -3,7 +3,11 @@
 import "@fontsource-variable/manrope";
 import { getCollection } from "astro:content";
 import Card from "./_card.astro";
-const articles = await getCollection("articles");
+
+const articles = await getCollection('articles', ({ data }) => {
+  return data.draft !== true;
+});;
+
 ---
 
 <html lang="en">
