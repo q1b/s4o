@@ -1,19 +1,26 @@
 import { defineConfig } from 'astro/config';
-import cloudflare from "@astrojs/cloudflare";
-import tailwind from "@astrojs/tailwind";
 
 import react from "@astrojs/react";
 import markdoc from "@astrojs/markdoc";
 import keystatic from '@keystatic/astro'
 
-// https://astro.build/config
+import tailwind from "@astrojs/tailwind";
+
+import cloudflare from "@astrojs/cloudflare";
+import vercel from '@astrojs/vercel/serverless';
+
+/** @type {'vercel' | 'cloudflare'} */
+let target = "vercel";
+
 export default defineConfig({
-  site: 'https://osteopath.pages.dev',
-  output: "server",
-  adapter: cloudflare({
+  site: target ? "https://osteopath.vercel.app" : 'https://osteopath.pages.dev',
+  output: "hybrid",
+  adapter: target === 'vercel' ? vercel() : cloudflare({
     platformProxy: {
       enabled: true
     }
   }),
-  integrations: [tailwind(), react(), markdoc(), keystatic()]
+  integrations: [
+    tailwind(), react(), markdoc(), ...( target === 'vercel' ? [keystatic()] : [])
+  ]
 });
