@@ -13,19 +13,27 @@ export default config({
       format: { contentField: 'content' },
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
+        description: fields.text({ label: 'Description', multiline: true }),
         draft: fields.checkbox({
           label: "Draft",
           description: "Draft aren't showing in the index",
+        }),
+        pubDate: fields.date({ label: 'Pub Date' }),
+        thumbnail: fields.image({
+          label: 'Thumbnail',
+          directory: 'src/assets/images/articles',
+          // Use the @assets path alias
+          publicPath: '@assets/images/articles/'
+        }),
+        tags: fields.multiRelationship({
+          label: 'Tags',
+          collection: 'tags',
         }),
         content: fields.document({
           label: 'Content',
           description: 'The content of the post.',
           formatting: true
         }),
-        categories: fields.multiRelationship({
-          label: 'Tags',
-          collection: 'tags',
-        })
       },
     }),
     // Colección que pertenece a los autores
