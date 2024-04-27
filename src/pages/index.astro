@@ -60,11 +60,13 @@ const articles = await getCollection('articles', ({ data }) => {
 								title={article.data.title}
 								description={article.data.description}
 								altText={`${article.data.title} Cover Image`}
+								slug={article.slug}
 							/>
 						))
 					}
 				</div>
 			</div>
+			
 		</main>
 		<footer
 			class="max-w-7x mx-auto overflow-hidden bg-white py-20 px-6 sm:py-24 lg:px-8"

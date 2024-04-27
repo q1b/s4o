@@ -1,0 +1,200 @@
+---
+import { Image } from "astro:assets";
+import { getCollection, getEntry, type CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const articles = await getCollection("articles");
+  const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/**/*.{jpeg,jpg,png,gif}",);
+  return articles.map((article, index) => {
+    const params = { slug: article.slug };
+    const getThumbnail = article.data.thumbnail && images[article.data.thumbnail];
+    switch (index) {
+      case 0:
+        return {
+          params,
+          props: { article, getThumbnail, next: articles.at(index + 1) },
+        };
+      case articles.length - 1:
+        return {
+          params,
+          props: { article, getThumbnail, prev: articles.at(index - 1) },
+        };
+      default:
+        return {
+          params,
+          props: {
+            article, getThumbnail,
+            prev: articles.at(index - 1),
+            next: articles.at(index + 1),
+          },
+        };
+    }
+  });
+}
+
+export type Props = {
+  article: CollectionEntry<"articles">;
+  next: CollectionEntry<"articles"> | undefined;
+  prev: CollectionEntry<"articles"> | undefined;
+  getThumbnail: (() => Promise<{
+    default: ImageMetadata;
+  }>) | undefined
+};
+
+const { article, next, prev, getThumbnail } = Astro.props;
+const { Content } = await article.render();
+
+const getTagNames = async (tags: { id: string }[]) => {
+  const getTagName = async (id: string) =>
+    (await getEntry("tags", id))?.data?.name as string;
+  const tagnames = await Promise.all(tags.map((tag) => getTagName(tag.id)));
+  return tagnames;
+};
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Osteopath</title>
+  </head>
+  <body class="flex flex-col items-center min-h-screen antialiased pt-20">
+    <a href="/" class="flex items-center gap-x-1 mr-1 text-blue-500">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-5 h-5">
+        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75h4.69Z" clip-rule="evenodd" />
+      </svg>      
+      Back
+    </a>
+    <main class="max-w-3xl w-full flex flex-col mt-16 mb-24 max-sm:px-4">
+      {getThumbnail && <Image class="object-cover border rounded-2xl mb-16" src={getThumbnail()}  alt={'as'}/> }
+      <h1 class="text-4xl dark:text-white text-indigo-600 mb-8 font-semibold">
+        {article.data.title}
+      </h1>
+      <h2 class="text-lg text-slate-600 font-medium dark:text-slate-200 mb-12">
+        {article.data.description}
+      </h2>
+      <article
+        class="prose dark:prose-invert max-w-none pb-12 border-b-2 border-b-slate-400"
+      >
+        <Content />
+      </article>
+      <div
+        class="grid grid-cols-3 place-content-center gap-x-2 dark:text-white mt-6"
+      >
+        {
+          prev ? (
+            <a href={`/article/${prev.slug}`} class="p-2 group">
+              <span class="flex gap-x-1 items-center text-xs">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M14 8a.75.75 0 0 1-.75.75H4.56l3.22 3.22a.75.75 0 1 1-1.06 1.06l-4.5-4.5a.75.75 0 0 1 0-1.06l4.5-4.5a.75.75 0 0 1 1.06 1.06L4.56 7.25h8.69A.75.75 0 0 1 14 8Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="leading-3 pt-0.5">Previous</span>
+              </span>
+              <h3 class="text-sm mt-1 mb-0.5 line-clamp-1">
+                {" "}
+                {prev.data.title}
+              </h3>
+              <p class="text-xs line-clamp-2">{prev.data.description}</p>
+              {(async () =>
+                (await getTagNames(prev.data.tags)).map((tag) => (
+                  <span class="text-xs px-1 py-0.5 bg-slate-500/50 rounded">
+                    {tag}
+                  </span>
+                )))()}
+            </a>
+          ) : (
+            <div class="p-2 opacity-30 select-none">
+              <span class="flex gap-x-1 items-center text-xs">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M14 8a.75.75 0 0 1-.75.75H4.56l3.22 3.22a.75.75 0 1 1-1.06 1.06l-4.5-4.5a.75.75 0 0 1 0-1.06l4.5-4.5a.75.75 0 0 1 1.06 1.06L4.56 7.25h8.69A.75.75 0 0 1 14 8Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+
+                <span class="leading-3 pt-0.5">Previous</span>
+              </span>
+              <h3 class="text-sm mt-1 mb-0.5 line-clamp-1"> ------------- </h3>
+              <p class="text-xs line-clamp-2"> -------------------------- </p>
+            </div>
+          )
+        }
+        {
+          (
+            <div class="h-full place-self-center py-2 w-0.5 bg-slate-500/50">
+              {" "}
+            </div>
+          )
+        }
+        {
+          next ? (
+            <a href={`/article/${next.slug}`} class="p-2 group">
+              <span class="flex gap-x-1 items-center justify-end text-xs">
+                <span class="leading-3 pt-0.5">Next</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M2 8a.75.75 0 0 1 .75-.75h8.69L8.22 4.03a.75.75 0 0 1 1.06-1.06l4.5 4.5a.75.75 0 0 1 0 1.06l-4.5 4.5a.75.75 0 0 1-1.06-1.06l3.22-3.22H2.75A.75.75 0 0 1 2 8Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </span>
+              <h3 class="text-sm mt-1 mb-0.5 line-clamp-1">
+                {next.data.title}
+              </h3>
+              <p class="text-xs line-clamp-2">{next.data.description}</p>
+              {(async () =>
+                (await getTagNames(next.data.tags)).map((tag) => (
+                  <span class="text-xs px-1 py-0.5 bg-slate-500/50 rounded">
+                    {tag}
+                  </span>
+                )))()}
+            </a>
+          ) : (
+            <div class="p-2 opacity-30 select-none">
+              <span class="flex gap-x-1 items-center justify-end text-xs">
+                <span class="leading-3 pt-0.5">Next</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M2 8a.75.75 0 0 1 .75-.75h8.69L8.22 4.03a.75.75 0 0 1 1.06-1.06l4.5 4.5a.75.75 0 0 1 0 1.06l-4.5 4.5a.75.75 0 0 1-1.06-1.06l3.22-3.22H2.75A.75.75 0 0 1 2 8Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </span>
+              <h3 class="text-sm mt-1 mb-0.5 line-clamp-1"> ------------- </h3>
+              <p class="text-xs line-clamp-2"> -------------------------- </p>
+            </div>
+          )
+        }
+      </div>
+    </main>
+  </body>
+</html>

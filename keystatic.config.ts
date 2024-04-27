@@ -23,7 +23,8 @@ export default config({
           label: 'Thumbnail',
           directory: 'src/assets/images/articles',
           // Use the @assets path alias
-          publicPath: '@assets/images/articles/'
+          // publicPath: '@assets/images/articles/'
+          publicPath: '/src/assets/images/articles/'
         }),
         tags: fields.multiRelationship({
           label: 'Tags',

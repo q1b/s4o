@@ -9,16 +9,19 @@ interface Props {
     title: string;
     pubDate: Date;
     description: string;
+    slug: string;
     tags: Omit<CollectionEntry<'tags'>, 'data'>[];
 }
 
-const { imagePath, altText, title, description, tags, pubDate } = Astro.props;
+const { imagePath,slug, altText, title, description, tags, pubDate } = Astro.props;
 const images = import.meta.glob<{ default: ImageMetadata }>(
     "/src/assets/**/*.{jpeg,jpg,png,gif}",
 );
+console.log(images);
+console.log(imagePath)
 if (
     imagePath !== undefined &&
-    !images[imagePath.replace("@assets/", "/src/assets/")]
+    !images[imagePath]
 )
     throw new Error(
         `"${imagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`,
@@ -34,9 +37,7 @@ if (
                 <Image
                     class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
                     alt={altText}
-                    src={images[
-                        imagePath.replace("@assets/", "/src/assets/")
-                    ]()}
+                    src={images[imagePath]()}
                 />
             )
         }
@@ -75,7 +76,7 @@ if (
         <h3
             class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600"
         >
-            <a href="#">
+            <a href={`/article/${slug}`}>
                 <span class="absolute inset-0"></span>
                 {title}
             </a>
