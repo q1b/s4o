@@ -29,10 +29,9 @@ export default config({
           label: 'Tags',
           collection: 'tags',
         }),
-        content: fields.document({
+        content: fields.markdoc({
           label: 'Content',
           description: 'The content of the post.',
-          formatting: true
         }),
       },
     }),
