@@ -5,19 +5,39 @@ export default config({
     kind: 'local',
   },
   collections: {
-    posts: collection({
-      label: 'Posts',
+    articles: collection({
+      label: 'Articles',
       slugField: 'title',
-      path: 'src/content/posts/*',
+      path: 'src/content/articles/*',
       entryLayout: 'content',
       format: { contentField: 'content' },
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
-        content: fields.markdoc({
+        draft: fields.checkbox({
+          label: "Draft",
+          description: "Draft aren't showing in the index",
+        }),
+        content: fields.document({
           label: 'Content',
           description: 'The content of the post.',
-          extension: 'md'
+          formatting: true
         }),
+        categories: fields.multiRelationship({
+          label: 'Tags',
+          collection: 'tags',
+        })
+      },
+    }),
+    // Colección que pertenece a los autores
+    tags: collection({
+      label: "Tag",
+      slugField: "name",
+      path: "src/content/tags/*",
+      format: {
+        data: "json",
+      },
+      schema: {
+        name: fields.slug({ name: { label: "Tag" } }),
       },
     }),
   },
