@@ -8,6 +8,7 @@ import keystatic from '@keystatic/astro'
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://osteopath.pages.dev',
   output: "server",
   adapter: cloudflare({
     platformProxy: {
