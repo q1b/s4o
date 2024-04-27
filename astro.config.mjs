@@ -2,8 +2,9 @@ import { defineConfig } from 'astro/config';
 import cloudflare from "@astrojs/cloudflare";
 import tailwind from "@astrojs/tailwind";
 
-import markdoc from "@astrojs/markdoc";
 import react from "@astrojs/react";
+import markdoc from "@astrojs/markdoc";
+import keystatic from '@keystatic/astro'
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,5 +14,5 @@ export default defineConfig({
       enabled: true
     }
   }),
-  integrations: [tailwind(), markdoc(), react()]
+  integrations: [tailwind(), react(), markdoc(), keystatic()]
 });
