@@ -9,7 +9,7 @@ const articles = await getCollection("articles", ({ data }) => {
 });
 ---
 
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -17,7 +17,13 @@ const articles = await getCollection("articles", ({ data }) => {
 		<meta name="generator" content={Astro.generator} />
 		<title>Osteopath</title>
 	</head>
-	<body class="flex flex-col items-center min-h-screen antialiased pt-20">
+	<body class="flex flex-col items-center min-h-screen antialiased pt-6 sm:pt-20">
+		<header class="w-full max-w-7xl flex justify-between px-12">
+			<div></div>
+			<nav class="flex gap-x-3">
+				<a href="#articles" class="font-medium text-blue-600 underline underline-offset-2"> Articles <span aria-hidden="true">&rarr;</span></a>
+			</nav>
+		</header>
 		<main class="w-full max-w-7xl">
 			<!-- <div class="flex flex-col gap-y-8 items-center">
 				<div class="size-44 rounded-full bg-slate-400"></div>
@@ -40,97 +46,88 @@ const articles = await getCollection("articles", ({ data }) => {
 					</a>
 				</div>
 			</div> -->
-			<div class="px-6 lg:flex lg:px-8 max-xl:overflow-hidden">
-				<div
-					class="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:max-w-none lg:min-w-full lg:flex-none lg:gap-y-8"
-				>
+			<div class="max-xl:overflow-hidden">
+				<div class="mx-auto max-w-7xl px-6 lg:flex lg:px-8">
+				  <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-y-8">
 					<div class="lg:col-end-1 lg:w-full lg:max-w-lg lg:pb-8">
-						<div class="flex flex-col gap-y-6">
-							<div class="size-32 rounded-full bg-slate-400">
+						<div class="flex flex-col gap-y-4 sm:gap-y-6">
+							<div class="size-24 sm:size-32 rounded-full bg-slate-400">
 							</div>
 							<h2
-								class="text-3xl font-bold tracking-tight text-gray-900"
+								class="font-bold tracking-tight text-gray-900 text-2xl sm:text-4xl"
 							>
 								Dr. Name
 							</h2>
 						</div>
-						<p class="mt-6 text-xl leading-8 text-indigo-900">
-							Full time osteopath for over last 6 years, done master's from Sri Sri University and currently, treated 2000+ patients situated in Delhi, India.
+						<p class="mt-3 sm:mt-6 text-lg sm:text-xl leading-8 text-gray-600">
+							Full time osteopath for over last 6 years, done
+							master's from Sri Sri University and currently,
+							treated 2000+ patients situated in Delhi, India.
 						</p>
-						<p class="mt-6 text-base leading-7 text-gray-600">
-							Osteopathy is a drug-free, non-invasive manual therapy that
-							aims to improve health across all body systems by
-							manipulating and strengthening the musculoskeletal
-							framework. It helps to strengthen the
-							musculoskeletal system of a body and prevents any
-							kind of injury.
+						<p class="mt-4 sm:mt-6 text-sm sm:text-base leading-7 text-gray-600">
+							Osteopathy is a drug-free, non-invasive manual
+							therapy that aims to improve health across all body
+							systems by manipulating and strengthening the
+							musculoskeletal framework. It helps to strengthen
+							the musculoskeletal system of a body and prevents
+							any kind of injury.
 						</p>
-						<div class="mt-10 flex gap-x-6">
-							<a
-								href="#"
-								class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-							>
-								Contact us <span aria-hidden="true" class=""
-									>&rarr;</span
-								>
-							</a>
-							<!-- <a
-										href="#"
-										class="rounded-md border border-slate-200 bg-white px-3.5 py-2.5 text-sm font-semibold text-slate-800 shadow-sm hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
-										>Learn more <span aria-hidden="true" class=""
-										>&rarr;</span
-									></a
-									> -->
-						</div>
+					  <div class="mt-5 sm:mt-10 flex">
+						<button type="button" class="rounded-md bg-indigo-600 sm:px-3.5 sm:py-2.5 px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Contact us <span aria-hidden="true">&rarr;</span></button>
+						<!-- <a href="#" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Contact us <span aria-hidden="true">&rarr;</span></a> -->
+					  </div>
 					</div>
-					<div
-						class="flex flex-wrap items-start justify-end gap-6 sm:gap-8 lg:contents"
-					>
-						<div
-							class="w-0 flex-auto lg:ml-auto lg:w-auto lg:flex-none lg:self-end"
-						>
-							<img
-								src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1"
-								alt=""
-								class="aspect-[7/5] w-[37rem] max-w-none rounded-2xl bg-gray-50 object-cover"
-							/>
+					<div class="flex flex-wrap items-start justify-end gap-6 sm:gap-8 lg:contents">
+					  <div class="w-0 flex-auto lg:ml-auto lg:w-auto lg:flex-none lg:self-end">
+						<img src="https://images.unsplash.com/photo-1670272502246-768d249768ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1152&q=80" alt="" class="aspect-[7/5] w-[37rem] max-w-none rounded-2xl bg-gray-50 object-cover">
+					  </div>
+					  <div class="contents lg:col-span-2 lg:col-end-2 lg:ml-auto lg:flex lg:w-[37rem] lg:items-start lg:justify-end lg:gap-x-8">
+						<div class="order-first flex w-64 flex-none justify-end self-end lg:w-auto">
+						  <img src="https://images.unsplash.com/photo-1605656816944-971cd5c1407f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=768&h=604&q=80" alt="" class="aspect-[4/3] w-[24rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover">
 						</div>
-						<div
-							class="contents lg:col-span-2 lg:col-end-2 lg:ml-auto lg:flex lg:w-[37rem] lg:items-start lg:justify-end lg:gap-x-8"
-						>
-							<div
-								class="order-first flex w-64 flex-none justify-end self-end lg:w-auto"
-							>
-								<img
-									src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-									alt=""
-									class="aspect-[4/3] w-[24rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover"
-								/>
-							</div>
-							<div
-								class="flex w-96 flex-auto justify-end lg:w-auto lg:flex-none"
-							>
-								<img
-									src="https://st3.depositphotos.com/1468291/15756/i/450/depositphotos_157561176-stock-photo-detail-of-female-therapist-manipulating.jpg"
-									alt=""
-									class="aspect-[7/5] w-[37rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover"
-								/>
-							</div>
-							<div
-								class="hidden sm:block sm:w-0 sm:flex-auto lg:w-auto lg:flex-none"
-							>
-								<img
-									src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=768&h=604&q=80"
-									alt=""
-									class="aspect-[4/3] w-[24rem] max-w-none rounded-2xl bg-gray-50 object-cover"
-								/>
-							</div>
+						<div class="flex w-96 flex-auto justify-end lg:w-auto lg:flex-none">
+						  <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1152&h=842&q=80" alt="" class="aspect-[7/5] w-[37rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover">
 						</div>
+						<div class="hidden sm:block sm:w-0 sm:flex-auto lg:w-auto lg:flex-none">
+						  <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=768&h=604&q=80" alt="" class="aspect-[4/3] w-[24rem] max-w-none rounded-2xl bg-gray-50 object-cover">
+						</div>
+					  </div>
 					</div>
+				  </div>
 				</div>
-			</div>
+			  </div>
+			  
+			<!-- <div class="lg:w-full lg:max-w-lg">
+				<div class="flex flex-col gap-y-6">
+					<div class="size-32 rounded-full bg-slate-400"></div>
+					<h2
+						class="text-lg font-bold tracking-tight text-gray-900 sm:text-4xl"
+					>
+						Dr. Name
+					</h2>
+				</div>
+				<p class="mt-6 text-xl leading-8 text-gray-600">
+					Full time osteopath for over last 6 years, done master's
+					from Sri Sri University and currently, treated 2000+
+					patients situated in Delhi, India.
+				</p>
+				<p class="mt-6 text-base leading-7 text-gray-600">
+					Osteopathy is a drug-free, non-invasive manual therapy that
+					aims to improve health across all body systems by
+					manipulating and strengthening the musculoskeletal
+					framework. It helps to strengthen the musculoskeletal system
+					of a body and prevents any kind of injury.
+				</p>
+				<div class="mt-10 flex">
+					<a
+						href="#"
+						class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+						>Contact us <span aria-hidden="true">&rarr;</span></a
+					>
+				</div>
+			</div> -->
 			<div class="mt-20 flex flex-col items-center w-full">
-				<h2 class="text-4xl text-center font-bold tracking-tight">
+				<h2 id="articles" class="scroll-m-12 text-4xl text-center font-bold tracking-tight">
 					Articles
 				</h2>
 				<p class="max-w-prose text-center mt-8">
@@ -251,6 +248,49 @@ const articles = await getCollection("articles", ({ data }) => {
 				</div>
 				<ContactForm />
 			</div>
+			<div class="mb-10 relative w-full max-sm:px-4">
+				<h2
+					class="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight sm:text-4xl bg-clip-text text-transparent bg-gradient-to-tr from-rose-500 to-purple-600"
+				>
+					Subscribe to our newsletter.
+				</h2>
+				<p
+					class="mx-auto mt-2 max-w-xl text-center text-lg leading-8 text-layer-10"
+				>
+					Reprehenderit ad esse et non officia in nulla. Id proident
+					tempor incididunt nostrud nulla et culpa.
+				</p>
+				<form class="mx-auto mt-10 flex max-w-md gap-x-4">
+					<label for="email-address" class="sr-only"
+						>Email address</label
+					>
+					<input
+						id="email-address"
+						name="email"
+						type="email"
+						autocomplete="email"
+						required
+						class="min-w-0 flex-auto rounded-md border-0 bg-layer-13/5 px-3.5 py-2 text-layer-13 shadow-sm ring-1 ring-inset ring-layer-10/10 focus:ring-2 focus:ring-inset focus:ring-layer-8 sm:text-sm sm:leading-6"
+						placeholder="Enter your email"
+					/>
+					<button
+						type="submit"
+						class="flex-none rounded-md bg-layer-12 px-3.5 py-2.5 text-sm font-semibold text-layer-1 shadow-sm hover:bg-layer-13 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-layer-12 transition-colors"
+						>Subscribe</button
+					>
+				</form>
+			</div>
+			<!-- <div class="relative isolate overflow-hidden bg-layer-0 px-6 py-24 shadow-2xl shadow-layer-6 sm:rounded-3xl sm:px-24 xl:py-32">
+				<svg viewBox="0 0 1024 1024" class="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-x-1/2" aria-hidden="true">
+				  <circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fill-opacity="0.7" />
+				  <defs>
+					<radialGradient id="759c1415-0410-454c-8f7c-9a820de03641" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(512 512) rotate(90) scale(512)">
+					  <stop stop-color="#7775D6" />
+					  <stop offset="1" stop-color="#E935C1" stop-opacity="0" />
+					</radialGradient>
+				  </defs>
+				</svg>
+			  </div> -->
 		</main>
 		<footer
 			class="max-w-7x mx-auto overflow-hidden bg-white py-20 px-6 sm:py-24 lg:px-8"
