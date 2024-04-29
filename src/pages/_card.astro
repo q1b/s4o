@@ -17,8 +17,7 @@ const { imagePath,slug, altText, title, description, tags, pubDate } = Astro.pro
 const images = import.meta.glob<{ default: ImageMetadata }>(
     "/src/assets/**/*.{jpeg,jpg,png,gif}",
 );
-console.log(images);
-console.log(imagePath)
+
 if (
     imagePath !== undefined &&
     !images[imagePath]

@@ -1,6 +1,30 @@
-// 1. Import utilities from `astro:content`
 import { z,defineCollection, reference } from 'astro:content';
-// 2. Define your collection(s)
+
+const homepageData = defineCollection({
+    type: 'data',
+    schema: z.object({
+        displayName: z.string(),
+        profile_pic: z.string(),
+        description: z.string(),
+        description_alt: z.string().optional(),
+        image1: z.string(),
+        image2: z.string(),
+        image3: z.string(),
+        image4: z.string(),
+    })
+})
+
+const testimonialsCollection = defineCollection({
+    type: 'data',
+    schema: z.object({
+        name: z.string(),
+        content: z.string(),
+        avatar: z.string(),
+        date: z.date(),
+        description: z.string().optional(),
+    }),
+})
+
 const articlesCollection = defineCollection({ 
     type: 'content', // v2.5.0 and later
     schema: z.object({
@@ -25,5 +49,6 @@ const tagsCollection = defineCollection({
 export const collections = {
   'articles': articlesCollection,
   'tags': tagsCollection,
+  'homepage': homepageData,
+  'testimonials': testimonialsCollection,
 };
-

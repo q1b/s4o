@@ -10,7 +10,7 @@ import cloudflare from "@astrojs/cloudflare";
 import vercel from '@astrojs/vercel/serverless';
 
 /** @type {'vercel' | 'cloudflare'} */
-let target = "cloudflare";
+let target = "vercel";
 
 export default defineConfig({
   site: target ? "https://osteopath.vercel.app" : 'https://osteopath.pages.dev',
