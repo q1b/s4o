@@ -8,7 +8,7 @@ export default config({
     brand: {
       name: 'Website CMS',
     },
-    navigation: ['---','homepage', '---','articles', 'tags', '---','testimonials'],
+    navigation: ['---','articles', 'tags','---','homepage', 'testimonials','faqs',],
   },
   singletons: {
     homepage: singleton({
@@ -49,6 +49,20 @@ export default config({
         }),
       }
     }),
+    faqs: singleton({
+      label: 'Frequently Asked Questions',
+      path: 'src/content/faqs/',
+      entryLayout: 'form',
+      schema: {
+        faqs: fields.array(fields.object({
+          question: fields.text({ label: 'Question' }),
+          answer: fields.text({ label: 'Answer', multiline: true }),
+        }),{
+            label: 'FAQ',
+            itemLabel: props => `${props.fields.question.value}`
+        }),
+      },
+    }),
   },
   collections: {
     articles: collection({
@@ -76,7 +90,7 @@ export default config({
           label: 'Tags',
           collection: 'tags',
         }),
-        content: fields.markdoc({
+        content: fields.document({
           label: 'Content',
           description: 'The content of the post.',
         }),
@@ -94,7 +108,6 @@ export default config({
         name: fields.slug({ name: { label: "Tag" } }),
       },
     }),
-
     testimonials: collection({
       label: 'Testimonials',
       path: 'src/content/testimonials/*',
