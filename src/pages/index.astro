@@ -5,6 +5,7 @@ import { getCollection } from "astro:content";
 import Card from "./_card.astro";
 import ContactForm from "./_contact-form.astro";
 import { Image } from "astro:assets";
+import { ViewTransitions } from "astro:transitions";
 const articles = await getCollection("articles", ({ data }) => {
 	return data.draft !== true;
 });
@@ -29,6 +30,7 @@ const testimonials = await getCollection("testimonials");
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Osteopath</title>
+		<ViewTransitions/>
 	</head>
 	<body class="flex flex-col items-center min-h-screen antialiased pt-6 sm:pt-14">
 		<header class="w-full max-w-7xl flex justify-between px-12">

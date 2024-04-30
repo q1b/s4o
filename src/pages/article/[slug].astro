@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection, getEntry, type CollectionEntry } from "astro:content";
+import { ViewTransitions } from "astro:transitions";
 
 export async function getStaticPaths() {
   const articles = await getCollection("articles");
@@ -59,6 +60,7 @@ const getTagNames = async (tags: { id: string }[]) => {
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Osteopath</title>
+    <ViewTransitions/>
   </head>
   <body class="flex flex-col items-center min-h-screen antialiased pt-20">
     <a href="/" class="flex items-center gap-x-1 mr-1 text-blue-500">

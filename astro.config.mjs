@@ -13,7 +13,8 @@ import vercel from '@astrojs/vercel/serverless';
 let target = "vercel";
 
 export default defineConfig({
-  site: target ? "https://osteopath.vercel.app" : 'https://osteopath.pages.dev',
+  site: target === 'vercel' ? "https://osteopath.vercel.app" : 'https://osteopath.pages.dev',
+  prefetch: true,
   output: "hybrid",
   adapter: target === 'vercel' ? vercel() : cloudflare({
     platformProxy: {
