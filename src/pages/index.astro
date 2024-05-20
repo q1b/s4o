@@ -12,13 +12,13 @@ const articles = await getCollection("articles", ({ data }) => {
 
 const profile = (await getCollection("homepage"))[0].data;
 const images = import.meta.glob<{ default: ImageMetadata }>(
-    "/src/assets/**/*.{jpeg,jpg,png,gif}",
+	"/src/assets/**/*.{jpeg,jpg,png,gif}",
 );
 
 const getProfilePic = images[profile.profile_pic];
-const getImage = (num:number) => {
-	return images[profile[`image${num}` as 'image1']]();
-}
+const getImage = (num: number) => {
+	return images[profile[`image${num}` as "image1"]]();
+};
 
 const testimonials = await getCollection("testimonials");
 ---
@@ -30,121 +30,125 @@ const testimonials = await getCollection("testimonials");
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Osteopath</title>
-		<ViewTransitions/>
+		<ViewTransitions />
 	</head>
-	<body class="flex flex-col items-center min-h-screen antialiased pt-6 sm:pt-14">
+	<body
+		class="flex flex-col items-center min-h-screen antialiased pt-6 sm:pt-14"
+	>
 		<header class="w-full max-w-7xl flex justify-between px-12">
 			<div></div>
 			<nav class="flex gap-x-3">
-				<a href="#articles" class="font-medium text-blue-600 underline underline-offset-2"> Articles <span aria-hidden="true">&rarr;</span></a>
+				<a
+					href="#articles"
+					class="font-medium text-blue-600 underline underline-offset-2"
+				>
+					Articles <span aria-hidden="true">&rarr;</span></a
+				>
 			</nav>
 		</header>
-		<main class="w-full max-w-7xl mt-6">
-			<!-- <div class="flex flex-col gap-y-8 items-center">
-				<div class="size-44 rounded-full bg-slate-400"></div>
-				<div class="flex flex-col items-center gap-y-4">
-					<h3 class="text-2xl sm:text-4xl font-bold tracking-tight">
-						Dr. Osteopath Name
-					</h3>
-					<p class="text-lg sm:text-2xl max-w-prose text-center">
-						Full time osteopath for over last 6 years, done master's
-						from Sri Sri University and currently, treated 2000+
-						patients situated in Delhi, India.
-					</p>
-					<a
-						href="#"
-						class="w-max rounded-md py-2.5 px-3.5 border mt-2 text-sm font-semibold shadow-sm"
-					>
-						Contact us <span aria-hidden="true" class=""
-							>&rarr;</span
+		<main class="w-full max-w-7xl mt-6 max-xl:overflow-hidden">
+			<div
+				class="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-y-8"
+			>
+				<div class="lg:col-end-1 lg:w-full lg:max-w-lg lg:pb-8">
+					<div class="flex flex-col gap-y-4 sm:gap-y-6">
+						<Image
+							src={getProfilePic()}
+							alt="Img"
+							class="size-24 sm:size-32 rounded-full"
+						/>
+						<h2
+							class="font-black text-2xl text-layer-12/90 sm:text-4xl"
 						>
-					</a>
-				</div>
-			</div> -->
-			<div class="max-xl:overflow-hidden">
-				<div class="mx-auto max-w-7xl px-6 lg:flex lg:px-8">
-				  <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-y-8">
-					<div class="lg:col-end-1 lg:w-full lg:max-w-lg lg:pb-8">
-						<div class="flex flex-col gap-y-4 sm:gap-y-6">
-							<Image src={getProfilePic()} alt="Img" class="size-24 sm:size-32 rounded-full" />
-							<!-- <div class="size-24 sm:size-32 rounded-full bg-slate-400">
-							</div> -->
-							<h2
-								class="font-bold tracking-tight text-gray-900 text-2xl sm:text-4xl"
-							>
-								{profile.displayName}
-							</h2>
-						</div>
-						<p class="mt-3 sm:mt-6 text-lg sm:text-xl leading-8 text-gray-600">
-							{profile.description}
-						</p>
-						{profile.description_alt && 
-						<p class="mt-4 sm:mt-6 text-sm sm:text-base leading-7 text-gray-600">
-							{profile.description_alt}
-						</p>}
-					  <div class="mt-5 sm:mt-10 flex">
-						<button type="button" class="rounded-md bg-indigo-600 sm:px-3.5 sm:py-2.5 px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Contact us <span aria-hidden="true">&rarr;</span></button>
-						<!-- <a href="#" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Contact us <span aria-hidden="true">&rarr;</span></a> -->
-					  </div>
+							<!-- text-transparent bg-clip-text bg-gradient-to-tr from-blue-400 w-max to-fuchsia-500 -->
+							{profile.displayName}
+						</h2>
 					</div>
-					<div class="flex flex-wrap items-start justify-end gap-6 sm:gap-8 lg:contents">
-					  <div class="w-0 flex-auto lg:ml-auto lg:w-auto lg:flex-none lg:self-end">
-						<Image src={getImage(1)} alt="" class="aspect-[7/5] w-[37rem] max-w-none rounded-2xl bg-gray-50 object-cover">
-					  </div>
-					  <div class="contents lg:col-span-2 lg:col-end-2 lg:ml-auto lg:flex lg:w-[37rem] lg:items-start lg:justify-end lg:gap-x-8">
-						<div class="order-first flex w-64 flex-none justify-end self-end lg:w-auto">
-						  <Image src={getImage(2)} alt="" class="aspect-[4/3] w-[24rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover">
-						</div>
-						<div class="flex w-96 flex-auto justify-end lg:w-auto lg:flex-none">
-						  <Image src={getImage(3)} alt="" class="aspect-[7/5] w-[37rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover">
-						</div>
-						<div class="hidden sm:block sm:w-0 sm:flex-auto lg:w-auto lg:flex-none">
-						  <Image src={getImage(4)} alt="" class="aspect-[4/3] w-[24rem] max-w-none rounded-2xl bg-gray-50 object-cover">
-						</div>
-					  </div>
+					<p
+						class="mt-3 sm:mt-6 text-lg sm:text-xl leading-8 text-layer-11"
+					>
+						{profile.description}
+					</p>
+					{
+						profile.description_alt && (
+							<p class="mt-4 sm:mt-6 text-sm sm:text-base leading-7 text-layer-10">
+								{profile.description_alt}
+							</p>
+						)
+					}
+
+					<div class="mt-10 flex">
+						<button
+							type="button"
+							class="rounded-md bg-indigo-600 sm:px-3.5 sm:py-2.5 px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+							>Contact us <span aria-hidden="true">&rarr;</span
+							></button
+						>
 					</div>
-				  </div>
 				</div>
-			  </div>
-			  
-			<!-- <div class="lg:w-full lg:max-w-lg">
-				<div class="flex flex-col gap-y-6">
-					<div class="size-32 rounded-full bg-slate-400"></div>
+				<div
+					class="flex flex-wrap items-start justify-end gap-6 sm:gap-8 lg:contents"
+				>
+					<div
+						class="w-0 flex-auto lg:ml-auto lg:w-auto lg:flex-none lg:self-end"
+					>
+						<Image
+							src={getImage(1)}
+							alt=""
+							class="aspect-[7/5] w-[37rem] max-w-none rounded-2xl bg-gray-50 object-cover"
+						/>
+					</div>
+					<div
+						class="contents lg:col-span-2 lg:col-end-2 lg:ml-auto lg:flex lg:w-[37rem] lg:items-start lg:justify-end lg:gap-x-8"
+					>
+						<div
+							class="order-first flex w-64 flex-none justify-end self-end lg:w-auto"
+						>
+							<Image
+								src={getImage(2)}
+								alt=""
+								class="aspect-[4/3] w-[24rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover"
+							/>
+						</div>
+						<div
+							class="flex w-96 flex-auto justify-end lg:w-auto lg:flex-none"
+						>
+							<Image
+								src={getImage(3)}
+								alt=""
+								class="aspect-[7/5] w-[37rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover"
+							/>
+						</div>
+						<div
+							class="hidden sm:block sm:w-0 sm:flex-auto lg:w-auto lg:flex-none"
+						>
+							<Image
+								src={getImage(4)}
+								alt=""
+								class="aspect-[4/3] w-[24rem] max-w-none rounded-2xl bg-gray-50 object-cover"
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div
+				class="mt-20 sm:mt-32 flex flex-col items-center w-full px-6 lg:px-8"
+			>
+				<div class="text-center max-w-prose">
 					<h2
-						class="text-lg font-bold tracking-tight text-gray-900 sm:text-4xl"
+						id="articles"
+						class="scroll-m-12 font-bold text-2xl sm:text-4xl text-layer-12/90"
 					>
-						Dr. Name
+						Articles
 					</h2>
-				</div>
-				<p class="mt-6 text-xl leading-8 text-gray-600">
-					Full time osteopath for over last 6 years, done master's
-					from Sri Sri University and currently, treated 2000+
-					patients situated in Delhi, India.
-				</p>
-				<p class="mt-6 text-base leading-7 text-gray-600">
-					Osteopathy is a drug-free, non-invasive manual therapy that
-					aims to improve health across all body systems by
-					manipulating and strengthening the musculoskeletal
-					framework. It helps to strengthen the musculoskeletal system
-					of a body and prevents any kind of injury.
-				</p>
-				<div class="mt-10 flex">
-					<a
-						href="#"
-						class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-						>Contact us <span aria-hidden="true">&rarr;</span></a
+					<p
+						class="mt-8 text-sm sm:text-base leading-7 text-layer-10"
 					>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit.
+						Odit consectetur aut dolorem numquam aliquam mollitia
+						eveniet! Architecto fuga provident possimus.
+					</p>
 				</div>
-			</div> -->
-			<div class="mt-20 flex flex-col items-center w-full">
-				<h2 id="articles" class="scroll-m-12 text-4xl text-center font-bold tracking-tight">
-					Articles
-				</h2>
-				<p class="max-w-prose text-center mt-8">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit.
-					Odit consectetur aut dolorem numquam aliquam mollitia
-					eveniet! Architecto fuga provident possimus.
-				</p>
 				<div
 					class="flex flex-wrap gap-8 items-center justify-center sm:gap-16 mt-16"
 				>
@@ -163,8 +167,8 @@ const testimonials = await getCollection("testimonials");
 					}
 				</div>
 			</div>
-			<div class="px-6 lg:px-8 my-24 lg:my-32">
-				<div class="mx-auto max-w-xl text-center">
+			<div class="mt-20 sm:mt-32 flex flex-col items-center w-full px-6 lg:px-8">
+				<div class="max-w-prose text-center">
 					<h2
 						class="text-lg font-semibold leading-8 tracking-tight text-indigo-600"
 					>
@@ -182,41 +186,44 @@ const testimonials = await getCollection("testimonials");
 					<div
 						class="-mt-8 sm:-mx-4 sm:columns-2 sm:text-[0] lg:columns-3"
 					>
-					 {testimonials.map((testimonial) => (
-						 <div class="pt-8 sm:inline-block sm:w-full sm:px-4">
-							 <figure
-								 class="rounded-2xl bg-gray-50 p-8 text-sm leading-6"
-							 >
-								 <blockquote class="text-gray-900">
-									 <p>
-										 “{testimonial.data.content}”
-									 </p>
-								 </blockquote>
-								 <figcaption class="mt-6 flex items-center gap-x-4">
-									 <Image
-										 class="h-10 w-10 rounded-full bg-gray-50"
-										 src={images[testimonial.data.avatar]()}
-										 alt=""
-									 />
-									 <div>
-										 <div class="font-semibold text-gray-900">
-											 {testimonial.data.name}
-										 </div>
-										 {testimonial.data.description && 
-										  <div class="text-gray-600">
-											 {testimonial.data.description}
-										 </div> 
-										 }
-										 
-									 </div>
-								 </figcaption>
-							 </figure>
-						 </div>
-					 ))}
+						{
+							testimonials.map((testimonial) => (
+								<div class="pt-8 sm:inline-block sm:w-full sm:px-4">
+									<figure class="rounded-2xl bg-gray-50 p-8 text-sm leading-6">
+										<blockquote class="text-gray-900">
+											<p>“{testimonial.data.content}”</p>
+										</blockquote>
+										<figcaption class="mt-6 flex items-center gap-x-4">
+											<Image
+												class="h-10 w-10 rounded-full bg-gray-50"
+												src={images[
+													testimonial.data.avatar
+												]()}
+												alt=""
+											/>
+											<div>
+												<div class="font-semibold text-gray-900">
+													{testimonial.data.name}
+												</div>
+												{testimonial.data
+													.description && (
+													<div class="text-gray-600">
+														{
+															testimonial.data
+																.description
+														}
+													</div>
+												)}
+											</div>
+										</figcaption>
+									</figure>
+								</div>
+							))
+						}
 					</div>
 				</div>
 			</div>
-			<div class="grid grid-cols-12">
+			<div class="grid grid-cols-12 mt-20 sm:mt-32">
 				<div
 					class="col-span-full md:col-span-6 lg:col-span-7 pl-8 py-12 bg-gradient-to-tl from-blue-200 from-0% via-60% to-100% via-indigo-100 to-violet-400 xl:rounded-l-2xl"
 				>
@@ -253,7 +260,9 @@ const testimonials = await getCollection("testimonials");
 									></path>
 								</svg>
 							</dt>
-							<dd>545 Mavis Island<br />Chicago, IL 99191</dd>
+							<dd>
+								545 Mavis Island<br />Chicago, IL 99191
+							</dd>
 						</div>
 						<div class="flex gap-x-4">
 							<dt class="flex-none">
@@ -311,36 +320,63 @@ const testimonials = await getCollection("testimonials");
 				</div>
 				<ContactForm />
 			</div>
-				<div class="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8">
-				  <div class="mx-auto max-w-2xl text-center">
-					<h2 class="text-2xl font-bold leading-10 tracking-tight text-gray-900">Frequently asked questions</h2>
-					<p class="mt-6 text-base leading-7 text-gray-600">Have a different question and can’t find the answer you’re looking for? Reach out to our support team by <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">sending us an email</a> and we’ll get back to you as soon as we can.</p>
-				  </div>
-				  <div class="mt-20">
-					<dl class="space-y-16 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-16 sm:space-y-0 lg:grid-cols-3 lg:gap-x-10">
-					  <div>
-						<dt class="text-base font-semibold leading-7 text-gray-900">What&#039;s the best thing about Switzerland?</dt>
-						<dd class="mt-2 text-base leading-7 text-gray-600">I don&#039;t know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.</dd>
-					  </div>
-			  
-					  <!-- More questions... -->
-					</dl>
-				  </div>
+			<div class="mt-20 sm:mt-32 flex flex-col items-center w-full px-6 lg:px-8">
+				<div class="max-w-prose text-center">
+					<h2
+						id="frequently-asked-questions"
+						class="scroll-m-12 font-bold text-2xl sm:text-4xl text-layer-12/90 tracking-tight leading-10"
+					>
+						Frequently asked questions
+					</h2>
+					<p
+						class="mt-8 text-sm sm:text-base leading-7 text-layer-10"
+					>
+						Have a different question and can’t find the answer
+						you’re looking for? Reach out to our support team by <a
+							href="#"
+							class="font-semibold text-indigo-600 hover:text-indigo-500"
+							>sending us an email</a
+						> and we’ll get back to you as soon as we can.
+					</p>
 				</div>
+				<div class="mt-20">
+					<dl
+						class="space-y-16 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-16 sm:space-y-0 lg:grid-cols-3 lg:gap-x-10"
+					>
+						<div>
+							<dt
+								class="text-base font-semibold leading-7 text-gray-900"
+							>
+								What&#039;s the best thing about Switzerland?
+							</dt>
+							<dd class="mt-2 text-base leading-7 text-gray-600">
+								I don&#039;t know, but the flag is a big plus.
+								Lorem ipsum dolor sit amet consectetur
+								adipisicing elit. Quas cupiditate laboriosam
+								fugiat.
+							</dd>
+						</div>
 
-			<div class="mb-10 relative w-full max-sm:px-4">
-				<h2
-					class="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight sm:text-4xl bg-clip-text text-transparent bg-gradient-to-tr from-rose-500 to-purple-600"
-				>
-					Subscribe to our newsletter.
-				</h2>
-				<p
-					class="mx-auto mt-2 max-w-xl text-center text-lg leading-8 text-layer-10"
-				>
-					Reprehenderit ad esse et non officia in nulla. Id proident
-					tempor incididunt nostrud nulla et culpa.
-				</p>
-				<form class="mx-auto mt-10 flex max-w-md gap-x-4">
+						<!-- More questions... -->
+					</dl>
+				</div>
+			</div>
+			<div class="mt-20 sm:mt-32 flex flex-col items-center w-full px-6 lg:px-8">
+				<div class="text-center max-w-prose mx-auto">
+					<h2
+						id="articles"
+						class="scroll-m-12 font-bold text-2xl tracking-tight sm:text-4xl bg-clip-text text-transparent bg-gradient-to-tr from-rose-500 to-purple-600"
+					>
+						Subscribe to our newsletter.
+					</h2>
+					<p
+						class="mt-8 text-sm sm:text-base leading-7 text-layer-10"
+					>
+						Reprehenderit ad esse et non officia in nulla. Id
+						proident tempor incididunt nostrud nulla et culpa.
+					</p>
+				</div>
+				<form class="w-full mt-10 flex max-w-md gap-x-4">
 					<label for="email-address" class="sr-only"
 						>Email address</label
 					>
@@ -360,18 +396,6 @@ const testimonials = await getCollection("testimonials");
 					>
 				</form>
 			</div>
-			<!-- <div class="relative isolate overflow-hidden bg-layer-0 px-6 py-24 shadow-2xl shadow-layer-6 sm:rounded-3xl sm:px-24 xl:py-32">
-				<svg viewBox="0 0 1024 1024" class="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-x-1/2" aria-hidden="true">
-				  <circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fill-opacity="0.7" />
-				  <defs>
-					<radialGradient id="759c1415-0410-454c-8f7c-9a820de03641" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(512 512) rotate(90) scale(512)">
-					  <stop stop-color="#7775D6" />
-					  <stop offset="1" stop-color="#E935C1" stop-opacity="0" />
-					</radialGradient>
-				  </defs>
-				</svg>
-			  </div> -->
-		
 		</main>
 		<footer
 			class="max-w-7x mx-auto overflow-hidden bg-white py-20 px-6 sm:py-24 lg:px-8"
