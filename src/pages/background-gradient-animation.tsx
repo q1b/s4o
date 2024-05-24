@@ -95,7 +95,7 @@ export const BackgroundGradientAnimation = ({
   return (
     <div
       className={cn(
-        "h-[1550px] sm:h-[1578px] lg:h-[1129px] w-full relative top-0 overflow-hidden left-0 bg-[linear-gradient(40deg,var(--gradient-background-start),var(--gradient-background-end))]",
+        "h-[1550px] sm:h-[1578px] lg:h-[1129px] w-full absolute top-0 overflow-hidden left-0 bg-[linear-gradient(40deg,var(--gradient-background-start),var(--gradient-background-end))]",
         containerClassName
       )}
     >
@@ -117,9 +117,6 @@ export const BackgroundGradientAnimation = ({
           </filter>
         </defs>
       </svg>
-      <div className={cn("absolute px-6 xl:px-0 z-50 inset-0 lg:pointer-events-none mx-auto max-w-7xl", className)}>
-        {children}
-      </div>
       <div
         className={cn(
           "gradients-container h-full w-full blur-lg",
