@@ -13,7 +13,7 @@ import vercel from '@astrojs/vercel/serverless';
 let target = "vercel";
 
 export default defineConfig({
-  site: target === 'vercel' ? "https://osteopath.vercel.app" : 'https://osteopath.pages.dev',
+  site: (target === 'vercel' ? "https://osteopath.vercel.app" : 'https://osteopath.pages.dev'),
   prefetch: true,
   output: "hybrid",
   adapter: target === 'vercel' ? vercel() : cloudflare({
@@ -22,6 +22,6 @@ export default defineConfig({
     }
   }),
   integrations: [
-    tailwind(), react(), markdoc(), ...( target === 'vercel' ? [keystatic()] : [])
+    tailwind(), react(), markdoc(), ...( (target === 'vercel') ? [keystatic()] : [])
   ]
 });

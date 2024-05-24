@@ -4,7 +4,7 @@ import plugin from 'tailwindcss/plugin';
 import svgToDataUri from "mini-svg-data-uri";
 // @ts-ignore
 import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
-
+ 
 const layers = Object.fromEntries(
 	Object.entries(goldDark).map(([_, value], i) => [i + 1, [gray[`gray${i + 1}` as 'gray1'], value]])
 );

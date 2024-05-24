@@ -28,9 +28,9 @@ if (
 ---
 
 <article
-    class="flex relative border group hover:bg-layer-2 transition-colors p-4 rounded-[20px] flex-col w-80 items-start justify-between"
+    class="flex group relative border group bg-layer-0 hover:bg-layer-1 transition-colors p-4 shrink rounded-[20px] flex-col w-80 items-start justify-between"
 >
-    <div class="relative w-full">
+    <div class="relative w-full group-hover:scale-105 transition-transform">
         {
             imagePath && (
                 <Image
@@ -73,7 +73,7 @@ if (
             }
         </div>
         <h3
-            class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600"
+            class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-blue-600"
         >
             <a href={`/article/${slug}`}>
                 <span class="absolute inset-0"></span>
